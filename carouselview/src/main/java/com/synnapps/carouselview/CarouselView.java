@@ -235,7 +235,8 @@ public class CarouselView extends FrameLayout {
 
     private void setData() {
         CarouselPagerAdapter carouselPagerAdapter = new CarouselPagerAdapter(getContext());
-        containerViewPager.setAdapter(carouselPagerAdapter);
+        InfinitePagerAdapter infinitePagerAdapter = new InfinitePagerAdapter(carouselPagerAdapter);
+        containerViewPager.setAdapter(infinitePagerAdapter);
         mIndicator.setViewPager(containerViewPager);
         mIndicator.requestLayout();
         mIndicator.invalidate();
@@ -294,7 +295,7 @@ public class CarouselView extends FrameLayout {
     }
 
 
-    private class CarouselPagerAdapter extends PagerAdapter {
+    public class CarouselPagerAdapter extends PagerAdapter {
         private Context mContext;
 
         public CarouselPagerAdapter(Context context) {
@@ -349,8 +350,9 @@ public class CarouselView extends FrameLayout {
 
         @Override
         public int getCount() {
-            return getPageCount();
+            return Integer.MAX_VALUE;
         }
+
     }
 
     ViewPager.OnPageChangeListener carouselOnPageChangeListener = new ViewPager.OnPageChangeListener() {
